@@ -64,26 +64,31 @@ CREATE TABLE KRSMahasiswa (
 **Script :**
 ```sql
 INSERT INTO Dosen (kd_ds, nama) VALUES
-('DS001', 'Nurul'),
-('DS002', 'Fauzan'),
-('DS003', 'Oktavia'),
-('DS004', 'Fajar'),
-('DS005', 'Bayu');
+('DS001', 'uden'),
+('DS002', 'kamul'),
+('DS003', 'udin'),
+('DS004', 'amar'),
+('DS005', 'pekir');
 select * from Dosen;
 
+![Screenshot 2024-05-20 123851](https://github.com/Pynixz/Praktikum3.S2/assets/147568964/52bc950f-c379-415c-ad31-a09f7ac10ba8)
+
+
 INSERT INTO Mahasiswa (nim, nama, jenis_kelamin, tgl_lahir, jalan, kota, kodepos, no_hp, kd_ds) VALUES
-('11223344', 'Nurul', 'Perempuan', '2005-07-14', NULL, 'Cikarang', NULL, NULL, 'DS001'),
-('11223345', 'Fauzan', 'Laki-laki', '2005-11-16', NULL, 'Cikarang', NULL, NULL, 'DS002'),
-('11223347', 'Oktavia Rizkha', 'Perempuan', '2002-01-02', NULL, 'Bekasi', NULL, NULL, 'DS003'),
-('11223348', 'Fajar', 'Laki-laki', '2005-02-05', NULL, 'Bekasi', NULL, NULL, 'DS004'),
-('11223349', 'Bayu', 'Laki-laki', '2005-03-10', NULL, 'Cikarang', NULL, NULL, 'DS005');
+('11223344', 'uden', 'Perempuan', '2005-07-14', NULL, 'Cikarang', NULL, NULL, 'DS001'),
+('11223345', 'kamul', 'Laki-laki', '2005-11-16', NULL, 'Cikarang', NULL, NULL, 'DS002'),
+('11223347', 'udin', 'Perempuan', '2002-01-02', NULL, 'Bekasi', NULL, NULL, 'DS003'),
+('11223348', 'amar', 'Laki-laki', '2005-02-05', NULL, 'Bekasi', NULL, NULL, 'DS004'),
+('11223349', 'pekir', 'Laki-laki', '2005-03-10', NULL, 'Cikarang', NULL, NULL, 'DS005');
 select * from Mahasiswa;
 ```
 
 #### 2. Hapus satu record data pada table dosen yang telah dirujuk pada tabel mahasiswa.
 ```sql
-DELETE FROM Dosen WHERE kd_ds = 'DS002';
+DELETE FROM Dosen WHERE kd_ds = 'DS005';
 ```
+![Screenshot 2024-05-20 123926](https://github.com/Pynixz/Praktikum3.S2/assets/147568964/16433347-e69f-4ced-8822-be9119e54d65)
+
 
 **Keterangan :** Terjadi ERROR dikarenakan `kd_ds` pada tabel Mahasiswa merupakan **FOREIGN KEY** dari tabel refensinya yaitu tabel Dosen. Dan pada tabel Dosen `kd_ds` merupakan **PRIMARY KEY**. Itu artinya, tabel Dosen sebagai tabel *parent/references* dan Mahasiswa sebagai tabel *child* maka dari itu saat menghapus satu record data pada tabel dosen terjadi error. 
 
@@ -92,18 +97,24 @@ DELETE FROM Dosen WHERE kd_ds = 'DS002';
 ALTER TABLE Mahasiswa DROP FOREIGN KEY FK_DosenWali;
 ALTER TABLE Mahasiswa ADD CONSTRAINT FK_DosenMahasiswa FOREIGN KEY (kd_ds) REFERENCES Dosen(kd_ds) ON UPDATE CASCADE ON DELETE RESTRICT;
 ```
+![Screenshot 2024-05-20 124857](https://github.com/Pynixz/Praktikum3.S2/assets/147568964/7e90bed2-5939-4da0-abcd-c9a8846b648c)
+
 
 #### 4. Lakukan perubahan data pada table dosen *(kd_ds)*
 ```sql
-UPDATE Dosen SET kd_ds = 'DS007' WHERE kd_ds = 'DS005';
+UPDATE Dosen SET kd_ds = WHERE kd_ds = 'DS005' WHERE nama = 'amar';
 ```
+![Screenshot 2024-05-20 124356](https://github.com/Pynixz/Praktikum3.S2/assets/147568964/c04eee43-6d9e-4929-b731-ef611ba46f20)
+
 
 **Keterangan :** `kd_ds` dapat diubah dikarenakan sebelumnya menggunakan `ON UPDATE CASCADE`
 
 #### 5. Lakukan penghapusan data pada table dosen
 ```sql
-DELETE FROM Dosen WHERE kd_ds = 'DS001';
+DELETE FROM Dosen WHERE kd_ds = 'DS003';
 ```
+![Screenshot 2024-05-20 124924](https://github.com/Pynixz/Praktikum3.S2/assets/147568964/83b57c4e-bf0d-4ad9-ad00-447608025a9c)
+
 
 **Keterangan :** Terjadi ERROR dan `kd_ds` tidak dapat dihapus.
 
